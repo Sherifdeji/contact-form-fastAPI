@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, Field
 
 app = FastAPI(title="Contact Form API")
 
 class ContactMessage(BaseModel):
     name: str
-    email: str
-    message: str
+    email: EmailStr
+    message: str = Field(..., min_length=10, description="Message must be at least 10 characters long")
     subject: str = "General Inquiry"
 
 @app.get("/")
