@@ -12,3 +12,10 @@ class ContactMessage(BaseModel):
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Contact Form API!"}
+
+@app.post("/contact")
+async def submit_contact_form(contact: ContactMessage):
+    return{
+         "status": "success",
+        "info": f"Message received from {contact.name}.",
+    }
